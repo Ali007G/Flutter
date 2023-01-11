@@ -27,6 +27,9 @@ class HomeActivity extends StatelessWidget {
   @overri
   Widget build(BuildContext context) {
     return Scaffold(
+    
+    /* this is the AppBar all properties and code */
+    
       appBar: AppBar(
         title: Text('My App Bar---'),
         //titleSpacing: 10,
