@@ -42,17 +42,20 @@ class HomeActivity extends StatelessWidget {
         elevation: 20,
         backgroundColor: Colors.red,
         actions: [
-          IconButton(onPressed: (){MySnackBar('People',context);}, icon: Icon(Icons.people),color: Colors.black,),
-          IconButton(onPressed: (){MySnackBar('Search', context);}, icon: Icon(Icons.search)),
-          IconButton(onPressed: (){MySnackBar('Settings', context);}, icon: Icon(Icons.settings)),
-
-
+          IconButton(onPressed: (){MySnackBar('People',context);}, icon: Icon(Icons.people,size: 30,),color: Colors.black),
+          IconButton(onPressed: (){MySnackBar('Search', context);}, icon: Icon(Icons.search),color: Colors.green),
+          IconButton(onPressed: (){MySnackBar('Settings', context);}, icon: Icon(Icons.settings), color: Colors.blueAccent,),
         ],
-
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.favorite, color: Colors.red,),
+        backgroundColor: Colors.green,
+        onPressed: (){
+          MySnackBar('This is love', context);
+        },
       ),
       body: Text('Hello')
 
     );
   }
-  
 }
