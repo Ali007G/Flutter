@@ -1,0 +1,88 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      //theme: ThemeData(primarySwatch: Colors.green),
+      //darkTheme: ThemeData(primarySwatch: Colors.black),
+      debugShowCheckedModeBanner: false,
+
+      home: HomeActivity(),
+    );
+  }
+}
+
+class HomeActivity extends StatelessWidget {
+  const HomeActivity({Key? key}) : super(key: key);
+
+  MySnackBar(message, context) {
+    return ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  MyAlertDialog(context){
+    return showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return Expanded(
+              child: AlertDialog(
+                title: Text('Alert !'),
+                content: Text('Do you want to delete'),
+                actions: [
+                  TextButton(onPressed: (){
+                    MySnackBar('Delete Sucess', context);
+                    Navigator.of(context).pop();
+                  }, child: Text('Yes'),),
+                  TextButton(onPressed: (){
+                    Navigator.of(context).pop();
+                  }, child: Text('No'),),
+                ],
+              ),
+          );
+        }
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    final ButtonStyle buttonStyle=ElevatedButton.styleFrom(
+      padding: EdgeInsets.all(10),
+      shadowColor: Colors.red,
+      surfaceTintColor: Colors.black,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10),),
+      ),
+    );
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('My App Bar---'),
+          //titleSpacing: 10,
+          //centerTitle: true,
+          //toolbarHeight: 60, // default = 60
+          toolbarOpacity: 1,
+          elevation: 20,
+          backgroundColor: Colors.red,
+        ),
+        
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(onPressed: (){
+              MyAlertDialog(context);
+            }, child: Text('Click me'),style: buttonStyle,),
+          ],
+        ),
+      ),
+    );
+  }
+}
