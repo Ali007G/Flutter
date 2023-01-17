@@ -1,0 +1,77 @@
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      //theme: ThemeData(primarySwatch: Colors.green),
+      //darkTheme: ThemeData(primarySwatch: Colors.black),
+      debugShowCheckedModeBanner: false,
+
+      home: HomeActivity(),
+    );
+  }
+}
+//// ctrl + alt + l for format code
+class HomeActivity extends StatelessWidget {
+  const HomeActivity({Key? key}) : super(key: key);
+
+  MySnackBar(message, context) {
+    return ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    final ButtonStyle buttonStyle=ElevatedButton.styleFrom(
+      padding: EdgeInsets.all(10),
+      shadowColor: Colors.red,
+      surfaceTintColor: Colors.black,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10),),
+      ),
+    );
+    return Scaffold(
+
+       /* body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              height: 100,
+              width: 100,
+              color: Colors.indigo,
+            ),
+            Container(
+              height: 100,
+              width: 100,
+              color: Colors.indigo,
+            ),
+            Container(
+              height: 100,
+              width: 100,
+              color: Colors.indigo,
+            ),
+          ],
+        ), */
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            TextButton(onPressed: (){}, child: Text('TextButtton'),),
+            ElevatedButton(onPressed: (){}, child: Text('ElevatedButton'),style: buttonStyle,),
+            OutlinedButton(onPressed: (){}, child: Text('OutLineButton'),),
+          ],
+        ),
+      ),
+    );
+  }
+}
