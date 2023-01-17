@@ -1,0 +1,170 @@
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.green),
+      //darkTheme: ThemeData(primarySwatch: Colors.black),
+      debugShowCheckedModeBanner: false,
+
+      home: HomeActivity(),
+    );
+  }
+}
+//// ctrl + alt + l for format code
+class HomeActivity extends StatelessWidget {
+  const HomeActivity({Key? key}) : super(key: key);
+
+  MySnackBar(message, context) {
+    return ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('My App Bar---'),
+          //titleSpacing: 10,
+          //centerTitle: true,
+          //toolbarHeight: 60, // default = 60
+          toolbarOpacity: 1,
+          elevation: 20,
+          backgroundColor: Colors.red,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  MySnackBar('People', context);
+                },
+                icon: Icon(
+                  Icons.people,
+                  size: 30,
+                ),
+                color: Colors.black),
+            IconButton(
+                onPressed: () {
+                  MySnackBar('Search', context);
+                },
+                icon: Icon(Icons.search),
+                color: Colors.green),
+            IconButton(
+              onPressed: () {
+                MySnackBar('Settings', context);
+              },
+              icon: Icon(Icons.settings),
+              color: Colors.blueAccent,
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(
+            Icons.favorite,
+            color: Colors.red,
+          ),
+          backgroundColor: Colors.green,
+          onPressed: () {
+            MySnackBar('This is love', context);
+          },
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          //currentIndex: 0,
+          currentIndex: 1,
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home_filled), label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.message), label: 'Contact'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.settings), label: 'Settings'),
+          ],
+          onTap: (int index) {
+            if (index == 0) {
+              MySnackBar('This is home', context);
+            }
+            if (index == 1) {
+              MySnackBar('This is contact', context);
+            }
+            if (index == 2) {
+              MySnackBar('This is settings', context);
+            }
+          },
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                  padding: EdgeInsets.all(0),
+                  //child: Text('Ali')
+                  child: UserAccountsDrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    accountName: Text('Ali'),
+                    accountEmail: Text('alicsebaiust01@gmail.com'),
+                    currentAccountPicture: Image.network('https://pixlok.com/images/flutter-logo-png-image-free-download/'),
+                    onDetailsPressed: () {},
+                  )),
+              ListTile(
+                title: Text('Home'),
+                leading: Icon(Icons.home_filled),
+                onTap: () {
+                  MySnackBar('Home', context);
+                },
+              ),
+              ListTile(
+                title: Text('Contact'),
+                leading: Icon(Icons.phone_android),
+              ),
+              ListTile(
+                title: Text('Settings'),
+                leading: Icon(Icons.settings_accessibility),
+              ),
+            ],
+          ),
+        ),
+        endDrawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                  padding: EdgeInsets.all(0),
+                  //child: Text('Ali')
+                  child: UserAccountsDrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    accountName: Text('Ali'),
+                    accountEmail: Text('alicsebaiust01@gmail.com'),
+                    currentAccountPicture: Image.network('https://pixlok.com/images/flutter-logo-png-image-free-download/'),
+                    onDetailsPressed: () {},
+                  )),
+              ListTile(
+                title: Text('Home'),
+                leading: Icon(Icons.home_filled),
+                onTap: () {
+                  MySnackBar('Home', context);
+                },
+              ),
+              ListTile(
+                title: Text('Contact'),
+                leading: Icon(Icons.phone_android),
+              ),
+              ListTile(
+                title: Text('Settings'),
+                leading: Icon(Icons.settings_accessibility),
+              ),
+            ],
+          ),
+        ),
+
+        body: Text('Hello'));
+  }
+}
