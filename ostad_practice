@@ -1,0 +1,198 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      //theme: ThemeData(primarySwatch: Colors.green),
+      //darkTheme: ThemeData(primarySwatch: Colors.black),
+      debugShowCheckedModeBanner: false,
+
+      home: HomeActivity(),
+    );
+  }
+}
+
+class HomeActivity extends StatelessWidget {
+  const HomeActivity({Key? key}) : super(key: key);
+
+  MySnackBar(message, context) {
+    return ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  MyAlertDialog(context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Expanded(
+            child: AlertDialog(
+              title: Text('Alert !'),
+              content: Text('Do you want to delete'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    MySnackBar('Delete Sucess', context);
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Yes'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('No'),
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    /*final ButtonStyle buttonStyle=ElevatedButton.styleFrom(
+      padding: EdgeInsets.all(10),
+      shadowColor: Colors.red,
+      surfaceTintColor: Colors.black,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10),),
+      ),
+    );*/
+    TextEditingController controller = TextEditingController();
+    TextEditingController agecontroller = TextEditingController();
+    return Scaffold(
+      appBar: AppBar(
+        title: Column(
+          children: [
+            Text('My App Bar---'),
+            Text('My App Bar---'),
+          ],
+        ),
+        //titleSpacing: 10,
+        //centerTitle: true,
+        //toolbarHeight: 60, // default = 60
+        toolbarOpacity: 1,
+        elevation: 20,
+        backgroundColor: Colors.red,
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text('My Image'),
+          //Image(image: AssetImage('assets/images/pic.png'))
+          Image.asset(
+            'assets/images/pic.png',
+            height: 100,
+            width: 200,
+            fit: BoxFit.scaleDown,
+          ),
+          Image.network(
+            'https://miro.medium.com/max/1400/0*ZQ9Xa7CINFVMA95w',
+            height: 100,
+            width: 300,
+            fit: BoxFit.fill,
+          ),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: TextField(
+              controller: controller,
+              onChanged: (value) {
+                //  print(value); ///textfield a kono kisu likle ata return kore
+              },
+              onSubmitted: (value) {
+                // print(value);
+              },
+              onTap: () {
+                // print('Someone tap the Textfield');
+              },
+              decoration: InputDecoration(
+                hintText: 'Enter your name',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(8),
+            padding: EdgeInsets.all(8.0),
+            color: Colors.green,
+            child: TextField(
+              controller: agecontroller,
+              onChanged: (value) {
+                //  print(value); ///textfield a kono kisu likle ata return kore
+              },
+              onSubmitted: (value) {
+                // print(value);
+              },
+              onTap: () {
+                // print('Someone tap the Textfield');
+              },
+              decoration: InputDecoration(
+                hintText: 'Enter your name',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                /*print(controller.text);
+            controller.text = 'Hello brother';
+            print(agecontroller.text);*/
+                // ScaffoldMessenger.of(context)
+                // //     .showSnackBar(SnackBar(content: Text(agecontroller.text)));
+                // ScaffoldMessenger.of(context)
+                // .showMaterialBanner(MaterialBanner(content: Text('Hello'), actions: [
+                //   IconButton(onPressed: (){}, icon: Icon(Icons.add))
+                // ]));
+                ScaffoldMessenger.of(context).showMaterialBanner(
+                    MaterialBanner(content: Text('Hello'), actions: [
+                  IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+                ]));
+              },
+              child: Text('Get TextField value')),
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // showAboutDialog(context: context); by default flutter
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text('Something'),
+                  content: Text('You are in danger'),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          MySnackBar('Cancel done', context);
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Cancel')),
+                    TextButton(
+                        onPressed: () {
+                          MySnackBar('You"re good', context);
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Okay'))
+                  ],
+                );
+              });
+        },
+        //child: Icon(Icons.star),
+        child: Text('Press'),
+        // label: Text('Press'),
+      ),
+    );
+  }
+}
