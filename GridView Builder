@@ -1,0 +1,84 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+main() {
+  runApp(const MyApp()); // Application
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(home: HomeActivity());
+  }
+}
+
+class HomeActivity extends StatelessWidget {
+  var MyItems = [
+    {
+      "img":
+          "https://cdn.ostad.app/public/upload/2022-11-27T11-08-30.401Z-Hero%20image-min.png",
+      "title": "Rabbil"
+    },
+    {
+      "img":
+          "https://cdn.ostad.app/public/upload/2022-11-27T11-08-30.401Z-Hero%20image-min.png",
+      "title": "Rupom"
+    },
+    {
+      "img":
+          "https://cdn.ostad.app/public/upload/2022-11-27T11-08-30.401Z-Hero%20image-min.png",
+      "title": "Hasan"
+    },
+    {
+      "img":
+          "https://cdn.ostad.app/public/upload/2022-11-27T11-08-30.401Z-Hero%20image-min.png",
+      "title": "Salif"
+    },
+    {
+      "img":
+          "https://cdn.ostad.app/public/upload/2022-11-27T11-08-30.401Z-Hero%20image-min.png",
+      "title": "Alhasan"
+    },
+    {
+      "img":
+          "https://cdn.ostad.app/public/upload/2022-11-27T11-08-30.401Z-Hero%20image-min.png",
+      "title": "Nurza"
+    },
+  ];
+
+  mySnackBar(context, msg) {
+    return ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(msg)));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("My App"),
+        ),
+        body: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            //crossAxisSpacing: 2,
+            childAspectRatio: 1.2,
+          ),
+          itemCount: MyItems.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                mySnackBar(context, MyItems[index]['title']);
+              },
+              child: Container(
+                  margin: EdgeInsets.all(10),
+                  width: double.infinity,
+                  height: 300,
+                  child:
+                      Image.network(MyItems[index]['img']!, fit: BoxFit.fill)),
+            );
+          },
+        ));
+  }
+}
