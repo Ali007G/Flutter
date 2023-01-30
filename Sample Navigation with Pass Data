@@ -1,0 +1,179 @@
+main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomeActivity(),
+    );
+  }
+}
+class HomeActivity extends StatelessWidget {
+  const HomeActivity({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              height: 100,
+              width: 100,
+              color: Colors.black54,
+            ),
+          ),
+          SizedBox(height: 30,),
+          ElevatedButton(onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeActivityOne()));
+          }, child: Text('Go Activity TO One')),
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeActivityTwo()));
+          }, child: Text('Go Activity TO Two')),
+
+        ],
+      ),
+    );
+  }
+}
+class HomeActivityOne extends StatelessWidget {
+  const HomeActivityOne({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home Activity One Page'),
+      ),
+      body: Center(
+        child: ElevatedButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeActivityTwo()));
+        },child: Text('Go To Home Activity 2'))
+      ),
+    );
+  }
+}
+class HomeActivityTwo extends StatelessWidget {
+  const HomeActivityTwo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home Activity Two Page'),
+      ),
+      body: Center(
+        child: ElevatedButton(onPressed: (){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeActivityOne()));
+    },child: Text('Go To Home Activity 1'))
+    ),
+    );
+  }
+}
+/*.............. Pass data with navigation .................*/
+/* 
+
+main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomeActivity(),
+    );
+  }
+}
+class HomeActivity extends StatelessWidget {
+  const HomeActivity({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              height: 100,
+              width: 100,
+              color: Colors.black54,
+              child: Text('Container'),
+            ),
+          ),
+          SizedBox(height: 30,),
+          ElevatedButton(onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeActivityOne("This is from home to Activity 1")));
+          }, child: Text('Go Activity TO One')),
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeActivityTwo("This is from home to Activity 2")));
+          }, child: Text('Go Activity TO Two')),
+        ],
+      ),
+    );
+  }
+}
+class HomeActivityOne extends StatelessWidget {
+  String msg;
+  HomeActivityOne(
+      this.msg,
+      {Key? key}) : super(key: key);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        //title: Text('Home Activity One Page'),
+        title: Text(msg),
+      ),
+      body: Center(
+        child: ElevatedButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeActivityTwo('Activity One go to Two')));
+        },child: Text('Go To Home Activity 2'))
+      ),
+    );
+  }
+}
+class HomeActivityTwo extends StatelessWidget {
+  String msg;
+  HomeActivityTwo(
+      this.msg,
+      {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(msg),
+      ),
+      body: Center(
+        child: ElevatedButton(onPressed: (){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeActivityOne("Activity Two go to one")));
+    },child: Text('Go To Home Activity 1'))
+    ),
+    );
+  }
+}
+
+*/
